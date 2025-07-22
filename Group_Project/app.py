@@ -1,7 +1,12 @@
 import streamlit as st
+from datetime import datetime
+import pytz
 
 # Title
 st.title("🏃 Fitness Tracker App")
+
+malaysia_time = datetime.now(pytz.timezone('Asia/Kuala_Lumpur')).strftime("%d %b %Y, %I:%M:%S %p")
+st.markdown(f"<p style='text-align:right; color:gray;'>⏰ Malaysia Time: {malaysia_time}</p>", unsafe_allow_html=True)
 
 # Set warm background color using custom CSS
 st.markdown(
@@ -54,11 +59,16 @@ st.write(f"Estimated calories burned: **{calories_burned} kcal**")
 # Section 3: Steps Tracker
 st.header("👣 Steps Tracker")
 steps_today = st.number_input("Enter your steps today", min_value=0)
+
 if steps_today >= 10000:
     st.balloons()
     st.success("🎉 Congrats! You reached your 10,000 steps goal!")
 else:
     st.warning(f"Keep going! You have {10000 - steps_today} steps to go!")
+
+# ✅ Progress Bar (correctly aligned)
+progress = min(steps_today / 10000, 1.0)
+st.progress(progress)
 
 # Section 4: Suggested Diet
 st.header("🍽 Suggested Diet")
@@ -70,6 +80,19 @@ if st.checkbox("Show diet tips"):
     - ❌ Reduce sugar and fried food
     - 🥣 Eat smaller portions more often
     """)
+
+   # Motivational Image
+st.markdown("### 🍏 Your doctor says: An apple a day keeps the doctor away!")
+
+# Create 3 columns (left, center, right)
+col1, col2, col3 = st.columns([1, 1, 1])  # middle column is wider
+
+with col2:
+    st.image(
+        "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg",
+        width=250,
+        caption="Sweet reminder : eat healthy, stay well!"
+    )
 
 # Section 5: Sleep Timer
 st.header("😴 Sleep Time")
