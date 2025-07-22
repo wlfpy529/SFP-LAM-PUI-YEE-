@@ -1,9 +1,17 @@
-string1 = 'light power'
-string_lower = light power
-string_upper = LIGHT POWER
-string_nospace = lightpower
+# Original text
+string1 = 'MaRviN THE bOt'
 
-print (string1)
-print (string_lower)
-print(string_upper)
-print (string_nospace)
+# convert to lowercase
+string_lower = string1.lower()
+
+# convert to uppercase 
+string_upper = string1.upper()
+
+# remove spaces
+string_nospace = string1.replace(" ", "")
+
+# Print results
+print(string1)         
+print(string_lower)    
+print(string_upper)    
+print(string_nospace)  
